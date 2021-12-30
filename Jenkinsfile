@@ -29,6 +29,7 @@ node {
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
             sshCommand remote: remote, command: 'touch /root/issam.txt'
+            sshCommand remote: remote, command: 'chown jenkins /root/issam.txt'
         } // stage
     } // withcredentials
 } // node
