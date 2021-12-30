@@ -24,7 +24,7 @@ remote.allowAnyHosts = true
 
 node {
     withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
-        remote.user = userName
+        remote.user = root
         remote.identityFile = identity
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
