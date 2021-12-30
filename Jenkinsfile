@@ -13,6 +13,29 @@ pipeline {
         sh 'mvn clean install'
       }
     }
+    stage ('config SSH') {
+      steps {
+        echo "config application"
+        script {
+          def remote = [:]
+remote.name = "artifactory-server"
+remote.host = "64.225.51.239"
+remote.allowAnyHosts = true
+
+node {
+    withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+        remote.user = userName
+        remote.identityFile = identity
+        stage("SSH Steps Rocks!") {
+            writeFile file: 'abc.sh', text: 'ls'
+            sshCommand remote: remote, command: 'touch /root/issam.txt'
+        } // stage
+    } // withcredentials
+} // node
+        } // script
+      } // steps
+    } // stage
+    
     stage('Upload to Artifactory') {
       //agent {
        // docker {
