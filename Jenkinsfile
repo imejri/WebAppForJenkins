@@ -23,15 +23,14 @@ remote.host = "64.225.51.239"
 remote.allowAnyHosts = true
 
 node {
-    //withCredentials([sshUserPrivateKey(credentialsId: 'identity', keyFileVariable: '/root/.ssh/id_rsa', passphraseVariable: '', usernameVariable: 'userName')]) {
-        remote.user = 'root'
-        //remote.identityFile = '/root/.ssh/id_rsa'
-        remote.password = credentials('pass-deploy')
+     withCredentials([usernamePassword(credentialsId: 'deploy-cred', passwordVariable: 'password', usernameVariable: 'username')]) {
+        remote.user = username
+        remote.password = password
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
             sshCommand remote: remote, command: 'touch /root/issam.txt'
         } // stage
-    //} // withcredentials
+    } // withcredentials
 } // node
         } // script
       } // steps
