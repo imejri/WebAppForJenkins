@@ -25,7 +25,7 @@ remote.allowAnyHosts = true
 node {
     withCredentials([sshUserPrivateKey(credentialsId: 'identity', keyFileVariable: '/root/.ssh/id_rsa', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = 'userName'
-        remote.identityFile = 'id_rsa'
+        remote.identityFile = '/root/.ssh/id_rsa'
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
             sshCommand remote: remote, command: 'touch /root/issam.txt'
