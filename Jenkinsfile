@@ -17,7 +17,7 @@ pipeline {
     }
     stage ('config SSH') {
       when {
-        branc "develop"
+        branch "develop"
       }
       steps {
         echo "config application"
