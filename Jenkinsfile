@@ -13,6 +13,11 @@ pipeline {
             steps {
                sh 'mvn package'
             } //steps
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/*.war', fingerprint: true, followSymlinks: false
+                }
+            }
         } // stage
          stage('Print dot net info') {
             steps {
