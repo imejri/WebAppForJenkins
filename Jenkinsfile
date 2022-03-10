@@ -13,6 +13,7 @@ pipeline {
             steps {
                sh 'mvn package'
             }
+        }
          stage('Print dot net info') {
             steps {
                sh 'dotnet --info'
