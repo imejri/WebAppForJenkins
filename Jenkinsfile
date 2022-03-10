@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven "local"
+        maven "localMaven"
     }
     stages {
         stage('Clean and Install') {
@@ -12,6 +12,10 @@ pipeline {
         stage('Package') {
             steps {
                sh 'mvn package'
+            }
+         stage('Print dot net info') {
+            steps {
+               sh 'dotnet --info'
             }
         } 
     }
