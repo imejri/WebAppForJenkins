@@ -12,12 +12,12 @@ pipeline {
         stage('Package') {
             steps {
                sh 'mvn package'
-            }
-        }
+            } //steps
+        } // stage
          stage('Print dot net info') {
             steps {
                sh 'dotnet --info'
-            }
-        } 
-    }
-}
+            } //steps
+        } // stage
+    } //stagees
+} // pipeline
